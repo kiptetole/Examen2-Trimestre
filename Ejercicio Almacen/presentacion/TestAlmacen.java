@@ -1,9 +1,7 @@
 package presentacion;
 
-import javax.sound.midi.SysexMessage;
-
 import gestion.Almacen;
-import gestion.Articulos.iva;
+import gestion.Articulo.iva;
 import gestion.CodigoNoExisteException;
 import gestion.IvaNotNullExeption;
 import gestion.PrecioNegativoExeption;
@@ -18,6 +16,10 @@ import utiles.Teclado;
  */
 public class TestAlmacen {
 
+  private static Menu modificacion = new Menu("Que campo del articulo quieres cambiar:" , new String[] { "Unidades", "Precio de Compra", "Precio de Venta", "Descripcion", "Iva", "Salir" });
+  
+  private static Menu Iva = new Menu("Menu elegir Iva: ", new String[] { "General", "Reducido", "Super Reducido" });
+
   static Almacen almacen = new Almacen();
 
   public static void main(String[] args) {
@@ -28,60 +30,27 @@ public class TestAlmacen {
     int selector;
 
     do {
+      
       selector = general.gestionar();
-
+      
       switch (selector) {
       case 1:
-        try {
-          annadirArticulo();
-        } catch (IvaNotNullExeption | PrecioNegativoExeption | StockNegativoExeption e) {
-          System.err.println(e.getMessage());
-          System.err.println("El articulo no se ha creado.");
-        }
+        annadir();
         break;
       case 2:
-        try {
-          almacen.borrar(Teclado.leerCadena("Introduzca el codigo del articulo a borrar: "));
-        } catch (CodigoNoExisteException e) {
-          System.err.println(e.getMessage());
-        }
+        borrar();
         break;
       case 3:
-        try {
-          modifica(Teclado.leerCadena("Introduzca el codigo del articulo a modificar: "));
-        } catch (StockNegativoExeption | CodigoNoExisteException | PrecioNegativoExeption | IvaNotNullExeption e) {
-          System.err.println(e.getMessage());
-        }
+        modificar();
         break;
       case 4:
-        try {
-          almacen.annadirStock(Teclado.leerCadena("Introduzca el codigo del articulo a añadir las unidades: "),
-              Teclado.leerEntero("Introduzca el numero de unidades a A�adir: "));
-        } catch (StockNegativoExeption | CodigoNoExisteException e) {
-          System.err.println(e.getMessage());
-        }
+        annadirStock();
         break;
       case 5:
-        try {
-          almacen.quitarStock(Teclado.leerCadena("Introduzca el codigo del articulo a añadir las unidades: "),
-              Teclado.leerEntero("Introduzca el numero de unidades a restar"));
-        } catch (StockNegativoExeption | CodigoNoExisteException e) {
-          System.err.println(e.getMessage());
-          System.out.println("No se pudo quitar tanto stock.");
-        }
+        quitarStock();
         break;
       case 6:
-        System.out.println("Lista de Articulos\n----------------------------------");
-        
-        try {
-          if (!(almacen.get("1")!= null)) {
-            throw new CodigoNoExisteException("");
-          }
-        } catch (CodigoNoExisteException e) {
-          System.err.println("No existe ningun articulo en el Almacen");
-        }
-        
-        almacen.mostrar();
+        mostrar();
         break;
       default:
         System.out.println("Adios             :)");
@@ -91,24 +60,96 @@ public class TestAlmacen {
   }
 
   /**
+   * Muestra el almacen
+   */
+  public static void mostrar() {
+    System.out.println("Lista de Articulos\n----------------------------------");
+
+    try {
+      if (!(almacen.get(1) != null)) {
+        throw new CodigoNoExisteException("");
+      }
+    } catch (CodigoNoExisteException e) {
+      System.err.println("No existe ningun articulo en el Almacen");
+    }
+
+    System.out.println(almacen.mostrar());
+    
+  }
+
+  /**
+   * Quita stock de un articulo del almacen pero si este se restara menos de cero no se restaria.
+   */
+  public static void quitarStock() {
+    try {
+      almacen.quitarStock(Teclado.leerEntero("Introduzca el codigo del articulo a añadir las unidades: "),
+          Teclado.leerEntero("Introduzca el numero de unidades a restar"));
+    } catch (StockNegativoExeption | CodigoNoExisteException e) {
+      System.err.println(e.getMessage());
+      System.out.println("No se pudo quitar tanto stock.");
+    }
+  }
+
+  /**
+   * Añade unidades de un articulo al stock que ya tiene
+   */
+  public static void annadirStock() {
+    try {
+      almacen.annadirStock(Teclado.leerEntero("Introduzca el codigo del articulo a añadir las unidades: "),
+          Teclado.leerEntero("Introduzca el numero de unidades a A�adir: "));
+    } catch (StockNegativoExeption | CodigoNoExisteException e) {
+      System.err.println(e.getMessage());
+    }
+  }
+
+  /**
+   * modifica cualquier campo del articulo del almacen.
+   */
+  public static void modificar() {
+    try {
+      modifica(Teclado.leerEntero("Introduzca el codigo del articulo a modificar: "));
+    } catch (StockNegativoExeption | CodigoNoExisteException | PrecioNegativoExeption | IvaNotNullExeption e) {
+      System.err.println(e.getMessage());
+    }
+  }
+
+  /**
+   * Borra un articulo del almacen pasandole un codigo.
+   */
+  public static void borrar() {
+    try {
+      almacen.borrar(Teclado.leerEntero("Introduzca el codigo del articulo a borrar: "));
+    } catch (CodigoNoExisteException e) {
+      System.err.println(e.getMessage());
+    }
+  }
+
+  /**
+   * añade un articulo al almacen
+   */
+  public static void annadir() {
+    try {
+      annadirArticulo();
+    } catch (IvaNotNullExeption | PrecioNegativoExeption | StockNegativoExeption e) {
+      System.err.println(e.getMessage());
+      System.err.println("El articulo no se ha creado.");
+    }
+  }
+
+  /**
    * Selector del iva del articulo.
    * 
    * @return
    */
   public static iva elegirIva() {
-    String opciones[] = { "General", "Reducido", "Super Reducido" };
-    Menu Iva = new Menu("Menu elegir Iva: ", opciones);
-    int selector;
 
-    selector = Iva.gestionar();
-
-    switch (selector) {
+    switch (Iva.gestionar()) {
     case 1:
-      return iva.General;
+      return iva.GENERAL;
     case 2:
-      return iva.Reducido;
+      return iva.REDUCIDO;
     default:
-      return iva.SuperReducido;
+      return iva.SUPERREDUCIDO;
     }
   }
 
@@ -125,20 +166,19 @@ public class TestAlmacen {
         elegirIva(), Teclado.leerCadena("Introduzca la descripcion"));
   }
 
-  public static void modifica(String codigo)
+  public static void modifica(int codigo)
       throws StockNegativoExeption, CodigoNoExisteException, PrecioNegativoExeption, IvaNotNullExeption {
 
-    String opciones[] = { "Unidades", "Precio de Compra", "Precio de Venta", "Descripcion", "Iva", "Salir" };
-    Menu modifica = new Menu("Que campo del articulo quieres cambiar:\n CodigoArticulo:" + codigo, opciones);
-    int selector;
-    
-    if (!(almacen.get(codigo)!= null)) {
+    if (!(almacen.get(codigo) != null)) {
       throw new CodigoNoExisteException("El codigo introducido no existe.");
     }
+    
+    int selector;
 
     do {
-      selector = modifica.gestionar();
 
+      selector = modificacion.gestionar();
+      
       switch (selector) {
       case 1:
         almacen.modUnidades(Teclado.leerEntero("Introduzca el stock nuevo: "), codigo);

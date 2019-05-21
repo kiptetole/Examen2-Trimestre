@@ -5,22 +5,22 @@ package gestion;
  * 
  * @author Jose Notario Millan
  */
-public class Articulos {
+public class Articulo {
 
   private int unidades;
   private double precioCompra;
   private double precioVenta;
   private String descripcion;
-  private String codigo;
+  private int codigo;
   private iva iva;
 
-  private static int contadorcodigo = 1;
+  private static int contadorCodigo = 1;
 
   public enum iva {
-    General, Reducido, SuperReducido
+    GENERAL, REDUCIDO, SUPERREDUCIDO
   }
 
-  Articulos(int unidades, double precioCompra, double precioVenta, iva iva, String descripcion)
+  Articulo(int unidades, double precioCompra, double precioVenta, iva iva, String descripcion)
       throws IvaNotNullExeption, PrecioNegativoExeption, StockNegativoExeption {
 
     setStock(unidades);
@@ -32,7 +32,7 @@ public class Articulos {
 
   }
 
-  Articulos(String codigo) {
+  Articulo(int codigo) {
     this.codigo = codigo;
   }
 
@@ -40,7 +40,7 @@ public class Articulos {
    * Establece el codigo del articulo.
    */
   void setCodigo() {
-    this.codigo = Integer.toString(AutoincrementoCodigo());
+    this.codigo = autoincrementoCodigo();
   }
 
   /**
@@ -48,8 +48,8 @@ public class Articulos {
    * 
    * @return Codigo Autoincrementado.
    */
-  int AutoincrementoCodigo() {
-    return contadorcodigo++;
+  int autoincrementoCodigo() {
+    return contadorCodigo++;
   }
 
   /**
@@ -102,7 +102,7 @@ public class Articulos {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+    result = prime * result + codigo;
     return result;
   }
 
@@ -114,11 +114,8 @@ public class Articulos {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    Articulos other = (Articulos) obj;
-    if (codigo == null) {
-      if (other.codigo != null)
-        return false;
-    } else if (!codigo.equals(other.codigo))
+    Articulo other = (Articulo) obj;
+    if (codigo != other.codigo)
       return false;
     return true;
   }
@@ -148,6 +145,6 @@ public class Articulos {
   public String toString() {
     return "Articulo Codigo:" + codigo + "\n-------------------------------" + "\nUnidades: " + unidades
         + "\nPrecio de Compra: " + precioCompra + "\nPrecio de Venta: " + precioVenta + "\nIva: " + iva
-        + "\nDescripcion: " + descripcion + "\n-------------------------------";
+        + "\nDescripcion: " + descripcion + "\n-------------------------------\n";
   }
 }

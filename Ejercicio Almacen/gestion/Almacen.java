@@ -2,11 +2,11 @@ package gestion;
 
 import java.util.ArrayList;
 
-import gestion.Articulos.iva;
+import gestion.Articulo.iva;
 
 public class Almacen {
 
-  ArrayList<Articulos> almacen = new ArrayList<Articulos>();
+  private ArrayList<Articulo> almacen = new ArrayList<Articulo>();
 
   /**
    * Añade un articulo al array almacen.
@@ -23,7 +23,7 @@ public class Almacen {
   public void annadir(int unidades, double precioCompra, double precioVenta, iva iva, String descripcion)
       throws IvaNotNullExeption, PrecioNegativoExeption, StockNegativoExeption {
 
-    almacen.add(new Articulos(unidades, precioCompra, precioVenta, iva, descripcion));
+    almacen.add(new Articulo(unidades, precioCompra, precioVenta, iva, descripcion));
 
   }
 
@@ -34,10 +34,10 @@ public class Almacen {
    * @return
    * @throws CodigoNoExisteException
    */
-  public Articulos get(String codigo) throws CodigoNoExisteException {
+  public Articulo get(int codigo) throws CodigoNoExisteException {
 
     try {
-      return almacen.get(almacen.indexOf(new Articulos(codigo)));
+      return almacen.get(almacen.indexOf(new Articulo(codigo)));
     } catch (IndexOutOfBoundsException e) {
       throw new CodigoNoExisteException("El Codigo no Existe");
     }
@@ -50,7 +50,7 @@ public class Almacen {
    * @param codigo
    * @throws CodigoNoExisteException
    */
-  public void borrar(String codigo) throws CodigoNoExisteException {
+  public void borrar(int codigo) throws CodigoNoExisteException {
 
     almacen.remove(get(codigo));
 
@@ -64,7 +64,7 @@ public class Almacen {
    * @throws StockNegativoExeption
    * @throws CodigoNoExisteException
    */
-  public void modUnidades(int unidades, String codigo) throws StockNegativoExeption, CodigoNoExisteException {
+  public void modUnidades(int unidades, int codigo) throws StockNegativoExeption, CodigoNoExisteException {
 
     get(codigo).setStock(unidades);
 
@@ -78,7 +78,7 @@ public class Almacen {
    * @throws PrecioNegativoExeption
    * @throws CodigoNoExisteException
    */
-  public void modPrecioCompra(double precioCompra, String codigo)
+  public void modPrecioCompra(double precioCompra, int codigo)
       throws PrecioNegativoExeption, CodigoNoExisteException {
 
     get(codigo).setPrecioCompra(precioCompra);
@@ -93,7 +93,7 @@ public class Almacen {
    * @throws PrecioNegativoExeption
    * @throws CodigoNoExisteException
    */
-  public void modPrecioVenta(double precioVenta, String codigo) throws PrecioNegativoExeption, CodigoNoExisteException {
+  public void modPrecioVenta(double precioVenta, int codigo) throws PrecioNegativoExeption, CodigoNoExisteException {
 
     get(codigo).setPrecioVenta(precioVenta);
 
@@ -106,7 +106,7 @@ public class Almacen {
    * @param codigo
    * @throws CodigoNoExisteException
    */
-  public void modDescripcion(String descripcion, String codigo) throws CodigoNoExisteException {
+  public void modDescripcion(String descripcion, int codigo) throws CodigoNoExisteException {
 
     get(codigo).setDescripcion(descripcion);
 
@@ -120,7 +120,7 @@ public class Almacen {
    * @throws IvaNotNullExeption
    * @throws CodigoNoExisteException
    */
-  public void modIva(iva iva, String codigo) throws IvaNotNullExeption, CodigoNoExisteException {
+  public void modIva(iva iva, int codigo) throws IvaNotNullExeption, CodigoNoExisteException {
 
     get(codigo).setIva(iva);
 
@@ -134,7 +134,7 @@ public class Almacen {
    * @throws StockNegativoExeption
    * @throws CodigoNoExisteException
    */
-  public void annadirStock(String codigo, int unidades) throws StockNegativoExeption, CodigoNoExisteException {
+  public void annadirStock(int codigo, int unidades) throws StockNegativoExeption, CodigoNoExisteException {
 
     get(codigo).setStock(get(codigo).getStock() + unidades);
 
@@ -148,7 +148,7 @@ public class Almacen {
    * @throws StockNegativoExeption
    * @throws CodigoNoExisteException
    */
-  public void quitarStock(String codigo, int unidades) throws StockNegativoExeption, CodigoNoExisteException {
+  public void quitarStock(int codigo, int unidades) throws StockNegativoExeption, CodigoNoExisteException {
 
     get(codigo).setStock(get(codigo).getStock() - unidades);
 
@@ -157,11 +157,14 @@ public class Almacen {
   /**
    * Muestra el arraylist por pantalla
    */
-  public void mostrar() {
+  public String mostrar() {
+    String aux = "";
     
-    for (Articulos articulo : almacen)
-      System.out.println(articulo.toString());
+    for (Articulo articulo : almacen)
+      aux += articulo.toString();
 
+    return aux;
+    
   }
 
 }
