@@ -13,19 +13,4 @@ public class Cuadrado extends Rectangulo {
     super(lado, lado);
   }
 
-  @Override
-  public String toString() {
-    return "------- Cuadrado -------\nLado = " + getAlto() + "\n--------------------------";
-  }
-
-  public String compararCuadrados(Cuadrado a) {
-
-    if (this.getAlto() == a.getAlto())
-      return "Los Cuadrados son iguales";
-    else if (this.getAlto() > a.getAlto())
-      return "El cuadrado dado es mas pequeño";
-    else
-      return "El cuadrado dado es mas grande";
-  }
-
 }

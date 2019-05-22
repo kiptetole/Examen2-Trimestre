@@ -11,14 +11,18 @@ import utiles.Teclado;
 public class TestRectangulo {
 
   public static void main(String[] args) {
-    Rectangulo a;
+    Rectangulo a = null;
     
     do {
-    a = new Rectangulo(Teclado.leerEntero("Introduzca la altura del rectangulo: "),
-        Teclado.leerEntero("Introduzca el ancho del rectangulo: "));
+    try {
+      a = new Rectangulo(Teclado.leerEntero("Introduzca la altura del rectangulo: "),
+          Teclado.leerEntero("Introduzca el ancho del rectangulo: "));
+    } catch (ArithmeticException e) {
+      System.err.println(e.getMessage());
+    }
     }while(a.getAlto()==0 || a.getAncho()==0);
     
-    System.out.println(a.dibujo());
+    System.out.println(a);
 
   }
 

@@ -17,17 +17,9 @@ public class Rectangulo {
   private int alto;
 
   public Rectangulo(int alto, int ancho) {
-
-    try {
-      setAlto(alto);
-    } catch (ArithmeticException e) {
-      System.err.println(e.getMessage());
-    }
-    try {
-      setAncho(ancho);
-    } catch (ArithmeticException e) {
-      System.err.println(e.getMessage());
-    }
+    
+    setAlto(alto);
+    setAncho(ancho);
 
   }
 
@@ -76,7 +68,7 @@ public class Rectangulo {
    * 
    * @return
    */
-  public String dibujo() {
+  public String toString() {
     String aux = "";
 
     for (int i = 0; i < this.ancho; i++) {
@@ -102,11 +94,28 @@ public class Rectangulo {
     return aux;
   }
 
-  /**
-   * Devuelve el estado de la instancia de clase determinada
-   */
   @Override
-  public String toString() {
-    return "\n------- Rectangulo -------\nAlto =" + alto + "\nAncho=" + ancho + "\n--------------------------";
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + alto;
+    result = prime * result + ancho;
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    Rectangulo other = (Rectangulo) obj;
+    if (alto != other.alto)
+      return false;
+    if (ancho != other.ancho)
+      return false;
+    return true;
   }
 }

@@ -3,14 +3,11 @@ Prueba de la clase Cuadrado.
 
 @author: Jose Notario Millan.
 '''
-from Ejercicio3_Examen2�Trimestre.Cuadrado import Cuadrado
+from Ejercicio3_Examen2ºTrimestre.Cuadrado import Cuadrado
 
-lado = int(input("Introduzca el valor del lado del 1º Cuadrado: "))
-lado2= int(input("Introduzca el valor del lado del 2º Cuadrado: "))
+cuadrado = Cuadrado(int(input("Introduzca el valor del lado del 1º Cuadrado: ")))  
+cuadrado2 = Cuadrado(int(input("Introduzca el valor del lado del 2º Cuadrado: ")))
 
-cuadrado = Cuadrado(lado, lado)  
-cuadrado2 = Cuadrado(lado2, lado2)
+print(cuadrado)
 
-print(cuadrado.dibujo())
-
-print(cuadrado.comparaCuadrado(cuadrado2)) 
+print(cuadrado.__eq__(cuadrado2))

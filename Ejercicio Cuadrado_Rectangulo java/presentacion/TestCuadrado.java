@@ -22,9 +22,12 @@ public class TestCuadrado {
     } while (b.getAlto()==0);
 
     
-    System.out.println(a.dibujo());
+    System.out.println(a);
     
-    System.out.println(a.compararCuadrados(b));
+    if (a.equals(b))
+      System.out.println("Los cuadrados son iguales.");
+    else
+      System.out.println("Los cuadrados son distintos.");
     
   }
 }

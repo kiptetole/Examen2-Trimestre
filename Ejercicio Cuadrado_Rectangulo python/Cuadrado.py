@@ -7,17 +7,32 @@ metodo diferente a la clase rectangulo:
 
 @author: Jose Notario Millan
 '''
-from Ejercicio3_Examen2�Trimestre.Rectangulo import Rectangulo
+from Ejercicio3_Examen2ºTrimestre.Rectangulo import Rectangulo
 
 class Cuadrado(Rectangulo):
     
-    def __init__(self,alto,ancho):
-        Rectangulo.__init__(self,alto,ancho)
+    def __init__(self, lado):
+        super().__init__(lado, lado)
+        self.lado = lado
         
-    def comparaCuadrado(self, cuadrado):
-        if self.alto == cuadrado.alto:
-            return "Los cuadrados son iguales"
-        if self.alto < cuadrado.alto:
-            return "El primer cuadrado es menor que el dado"
-        if self.alto > cuadrado.alto:
-            return "EL primer cuadrado es mayor que el dado"
+    @property
+    def lado(self):
+        return self.__lado
+    
+    @lado.setter
+    def lado(self, lado):
+        self.__lado = lado
+
+    """
+    Método equals para comprar los lados de un cuadrado.
+    """
+    
+    def __eq__(self, comparacion):
+        if self.__lado == comparacion.__lado:
+            return "Los cuadrados son iguales."
+        else:
+            if  self.__lado >= comparacion.__lado:
+                return "El cuadrado 1 es mayor."
+            else:
+                return "El cuadrado 1 es menor."
+        

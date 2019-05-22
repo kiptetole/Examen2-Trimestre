@@ -14,54 +14,50 @@ Esta es la clase Rectangulo donde va a tener en cuenta:
 
 class Rectangulo():
     
-    def __init__(self,alto,ancho):
+    def __init__(self, ancho, alto):
+        Rectangulo.__comprobarAncho(ancho)
+        Rectangulo.__comprobarAlto(alto)
+        self.__ancho = ancho
+        self.__alto = alto
     
-        self.setAlto(alto)
-        self.setAncho(ancho)
+    @property
+    def ancho(self):
+        return self.__ancho
+    @property
+    def alto(self):
+        return self.__alto
     
-    '''
-
-        Metodo para asignar el valor la altura de el rectangulo.
-    
-    '''
-
-    def setAlto(self, alto):
+    ##Setters##
+    @ancho.setter
+    def ancho(self, ancho):
+        Rectangulo.__comprobarAncho(ancho)
+        self.__ancho = ancho
         
-        try:
-            if alto <= 0 or alto > 10: 
-                raise Exception
-        except Exception:  
-            print('La altura no puede ser negativo o mayor que 10')
-            self.alto = 0
-        else:
-            self.alto = alto
-            
-    '''
-
-        Metodo para asignar el valor de ancho de el rectangulo.
+    @alto.setter
+    def alto(self, alto):
+        Rectangulo.__comprobarAlto(alto)
+        self.__alto = alto
     
-    '''
-    def setAncho(self, ancho):
+    ## Lanzamiento de Exepciones ##
+    @staticmethod
+    def __comprobarAncho(ancho):
+        if ancho <= 0 or ancho > 10:
+            raise TypeError("El ancho indicado es inválido.")
+    
+    @staticmethod
+    def __comprobarAlto(alto):
+        if alto <= 0 or alto > 10:
+            raise TypeError("El alto indicado es inválido.")
         
-        try:
-            if ancho <= 0 or ancho > 10:
-                raise Exception()
-        except Exception: 
-            print('El ancho no puede ser negativo o mayor que 10')
-            self.ancho = 0;
-        else:
-            self.ancho = ancho
-            
     '''
     
         Metodo que dibuja el rectangulo segun su altura y anchura.
     
     '''
-    def dibujo(self):
+    def __str__(self):
         linea = ""
         
-        
-        for i in range(0,self.alto):
+        for i in range(0,self.ancho):
             linea += "[]"
         linea += "\n"
           
