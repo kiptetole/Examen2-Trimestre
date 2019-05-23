@@ -2,7 +2,7 @@ package gestion;
 
 import java.util.ArrayList;
 
-import gestion.Articulo.iva;
+import gestion.Articulo.IVA;
 
 public class Almacen {
 
@@ -20,7 +20,7 @@ public class Almacen {
    * @throws PrecioNegativoExeption
    * @throws StockNegativoExeption
    */
-  public void annadir(int unidades, double precioCompra, double precioVenta, iva iva, String descripcion)
+  public void annadir(int unidades, double precioCompra, double precioVenta, IVA iva, String descripcion)
       throws IvaNotNullExeption, PrecioNegativoExeption, StockNegativoExeption {
 
     almacen.add(new Articulo(unidades, precioCompra, precioVenta, iva, descripcion));
@@ -120,7 +120,7 @@ public class Almacen {
    * @throws IvaNotNullExeption
    * @throws CodigoNoExisteException
    */
-  public void modIva(iva iva, int codigo) throws IvaNotNullExeption, CodigoNoExisteException {
+  public void modIva(IVA iva, int codigo) throws IvaNotNullExeption, CodigoNoExisteException {
 
     get(codigo).setIva(iva);
 

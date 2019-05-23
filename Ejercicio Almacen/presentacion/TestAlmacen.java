@@ -1,7 +1,7 @@
 package presentacion;
 
 import gestion.Almacen;
-import gestion.Articulo.iva;
+import gestion.Articulo.IVA;
 import gestion.CodigoNoExisteException;
 import gestion.IvaNotNullExeption;
 import gestion.PrecioNegativoExeption;
@@ -135,15 +135,15 @@ public class TestAlmacen {
    * 
    * @return
    */
-  public static iva elegirIva() {
+  public static IVA elegirIva() {
 
     switch (Iva.gestionar()) {
     case 1:
-      return iva.GENERAL;
+      return IVA.GENERAL;
     case 2:
-      return iva.REDUCIDO;
+      return IVA.REDUCIDO;
     default:
-      return iva.SUPERREDUCIDO;
+      return IVA.SUPERREDUCIDO;
     }
   }
 

@@ -12,15 +12,15 @@ public class Articulo {
   private double precioVenta;
   private String descripcion;
   private int codigo;
-  private iva iva;
+  private IVA iva;
 
   private static int contadorCodigo = 1;
 
-  public enum iva {
+  public enum IVA {
     GENERAL, REDUCIDO, SUPERREDUCIDO
   }
 
-  Articulo(int unidades, double precioCompra, double precioVenta, iva iva, String descripcion)
+  Articulo(int unidades, double precioCompra, double precioVenta, IVA iva, String descripcion)
       throws IvaNotNullExeption, PrecioNegativoExeption, StockNegativoExeption {
 
     setStock(unidades);
@@ -67,7 +67,7 @@ public class Articulo {
    * @param iva
    * @throws IvaNotNullExeption
    */
-  void setIva(iva iva) throws IvaNotNullExeption {
+  void setIva(IVA iva) throws IvaNotNullExeption {
     if (iva == null)
       throw new IvaNotNullExeption("El iva no puede ser nulo.");
     this.iva = iva;
