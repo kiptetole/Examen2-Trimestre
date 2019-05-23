@@ -48,7 +48,7 @@ public class Articulo {
    * 
    * @return Codigo Autoincrementado.
    */
-  int autoincrementoCodigo() {
+  private int autoincrementoCodigo() {
     return contadorCodigo++;
   }
 
