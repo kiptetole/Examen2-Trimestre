@@ -20,7 +20,6 @@ class Cuadrado(Rectangulo):
 
     @lado.setter
     def lado(self, lado):
-        Cuadrado.verifica_lado(lado)
         self.alto = lado
         self.ancho = lado
     
@@ -32,8 +31,3 @@ class Cuadrado(Rectangulo):
 
     def __eq__(self, other):
         return (self.lado) == (other.lado)
-
-    @staticmethod
-    def __verifica_lado(num):
-        if (num <= 0 or num > 10):
-            raise ArithmeticError()    
