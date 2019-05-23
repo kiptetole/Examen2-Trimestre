@@ -11,8 +11,8 @@ package utiles;
  * 
  */
 public class Menu {
-  String titulo = null;
-  String opciones[] = null;
+  private String titulo = null;
+  private String opciones[] = null;
   int numOpciones;
 
   /**
