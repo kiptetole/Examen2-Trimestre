@@ -18,16 +18,18 @@ public class TestCuadrado {
     } while (a.getAlto()==0);
 
     do {
-      b = new Cuadrado(Teclado.leerEntero("Introduzca el valor del lado del cuadrado a: "));
+      b = new Cuadrado(Teclado.leerEntero("Introduzca el valor del lado del cuadrado b: "));
     } while (b.getAlto()==0);
 
     
     System.out.println(a);
     
-    if (a.equals(b))
+    if (a.compareTo(b)==0)
       System.out.println("Los cuadrados son iguales.");
     else
-      System.out.println("Los cuadrados son distintos.");
-    
+      if (a.compareTo(b)==1)
+        System.out.println("Los cuadrado a es mayor.");
+      else
+        System.out.println("Los cuadrado b es mayor.");
   }
 }

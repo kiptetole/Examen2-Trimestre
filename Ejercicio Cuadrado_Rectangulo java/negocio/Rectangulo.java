@@ -13,8 +13,8 @@ package negocio;
  */
 public class Rectangulo {
 
-  private int ancho;
-  private int alto;
+  protected int ancho;
+  protected int alto;
 
   public Rectangulo(int alto, int ancho) {
     
@@ -28,7 +28,7 @@ public class Rectangulo {
    * 
    * @param ancho
    */
-  private void setAncho(int ancho) throws ArithmeticException {
+  protected void setAncho(int ancho) throws ArithmeticException {
     if (ancho <= 0 || ancho > 10)
       throw new ArithmeticException("EL ancho no puede ser negativo, ni sobrepasar 10");
     this.ancho = ancho;
@@ -48,7 +48,7 @@ public class Rectangulo {
    * 
    * @param alto
    */
-  private void setAlto(int alto) throws ArithmeticException {
+  protected void setAlto(int alto) throws ArithmeticException {
     if (alto <= 0 || alto > 10)
       throw new ArithmeticException("La altura no puede ser negativa, ni sobrepasar 10");
     this.alto = alto;
@@ -92,30 +92,5 @@ public class Rectangulo {
         aux += "[]";
       }
     return aux;
-  }
-
-  @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + alto;
-    result = prime * result + ancho;
-    return result;
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    Rectangulo other = (Rectangulo) obj;
-    if (alto != other.alto)
-      return false;
-    if (ancho != other.ancho)
-      return false;
-    return true;
   }
 }
