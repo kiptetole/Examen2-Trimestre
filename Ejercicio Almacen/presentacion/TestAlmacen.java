@@ -140,9 +140,7 @@ public class TestAlmacen {
   public static void modifica(int codigo)
       throws StockNegativoExeption, CodigoNoExisteException, PrecioNegativoExeption, IvaNotNullExeption {
 
-    if (!(almacen.get(codigo) != null)) {
-      throw new CodigoNoExisteException("El codigo introducido no existe.");
-    }
+    almacen.get(codigo);
     
     int selector;
 
