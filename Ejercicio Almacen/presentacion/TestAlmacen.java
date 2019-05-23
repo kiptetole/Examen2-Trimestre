@@ -24,9 +24,8 @@ public class TestAlmacen {
 
   public static void main(String[] args) {
 
-    String opciones[] = { "Añadir un Articulo", "Quitar un articulo", "Modificar un articulo", "Añadir Stock",
-        "Quitar Stock", "Mostrar Articulos", "Salir" };
-    Menu general = new Menu("Menu del almacen:", opciones);
+    Menu general = new Menu("Menu del almacen:", new String[] { "Añadir un Articulo", "Quitar un articulo", "Modificar un articulo", "Añadir Stock",
+        "Quitar Stock", "Mostrar Articulos", "Salir" });
     int selector;
 
     do {
