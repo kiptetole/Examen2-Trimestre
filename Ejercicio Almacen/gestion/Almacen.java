@@ -157,7 +157,7 @@ public class Almacen {
   /**
    * Muestra el arraylist por pantalla
    */
-  public String mostrar() {
+  public String toString() {
     String aux = "";
     
     for (Articulo articulo : almacen)

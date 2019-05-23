@@ -67,7 +67,7 @@ public class TestAlmacen {
     if (almacen.isEmpty())
       System.err.println("Almacen Vacio");
 
-    System.out.println(almacen.mostrar());
+    System.out.println(almacen);
     
   }
 
