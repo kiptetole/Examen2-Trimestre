@@ -166,5 +166,8 @@ public class Almacen {
     return aux;
     
   }
-
+  
+  public boolean isEmpty() {
+    return almacen.isEmpty();
+  }
 }

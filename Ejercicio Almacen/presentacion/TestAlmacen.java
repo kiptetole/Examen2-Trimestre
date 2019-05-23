@@ -64,13 +64,8 @@ public class TestAlmacen {
   public static void mostrar() {
     System.out.println("Lista de Articulos\n----------------------------------");
 
-    try {
-      if (!(almacen.get(1) != null)) {
-        throw new CodigoNoExisteException("");
-      }
-    } catch (CodigoNoExisteException e) {
-      System.err.println("No existe ningun articulo en el Almacen");
-    }
+    if (almacen.isEmpty())
+      System.err.println("Almacen Vacio");
 
     System.out.println(almacen.mostrar());
     
