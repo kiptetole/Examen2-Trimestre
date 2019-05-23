@@ -10,4 +10,8 @@ cuadrado2 = Cuadrado(int(input("Introduzca el valor del lado del 2º Cuadrado: "
 
 print(cuadrado)
 
-print(cuadrado.__eq__(cuadrado2))
+if cuadrado.__eq__(cuadrado2):
+    print("Cuadrados iguales.")
+
+if cuadrado.__gt__(cuadrado2):
+    print("Cuadrados diferentes")

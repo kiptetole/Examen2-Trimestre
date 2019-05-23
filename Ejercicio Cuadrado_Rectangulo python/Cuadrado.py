@@ -10,29 +10,30 @@ metodo diferente a la clase rectangulo:
 from Ejercicio3_Examen2ºTrimestre.Rectangulo import Rectangulo
 
 class Cuadrado(Rectangulo):
-    
+
     def __init__(self, lado):
         super().__init__(lado, lado)
-        self.lado = lado
-        
+
     @property
     def lado(self):
-        return self.__lado
-    
+        return self.ancho
+
     @lado.setter
     def lado(self, lado):
-        self.__lado = lado
-
-    """
-    Método equals para comprar los lados de un cuadrado.
-    """
+        Cuadrado.verifica_lado(lado)
+        self.alto = lado
+        self.ancho = lado
     
-    def __eq__(self, comparacion):
-        if self.__lado == comparacion.__lado:
-            return "Los cuadrados son iguales."
-        else:
-            if  self.__lado >= comparacion.__lado:
-                return "El cuadrado 1 es mayor."
-            else:
-                return "El cuadrado 1 es menor."
-        
+    def __gt__(self, other):
+        return (self.lado) > (other.lado)
+
+    def __ge__(self, other):
+        return (self.lado) >= (other.lado)
+
+    def __eq__(self, other):
+        return (self.lado) == (other.lado)
+
+    @staticmethod
+    def __verifica_lado(num):
+        if (num <= 0 or num > 10):
+            raise ArithmeticError()    

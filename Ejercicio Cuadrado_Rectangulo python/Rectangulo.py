@@ -12,42 +12,34 @@ Esta es la clase Rectangulo donde va a tener en cuenta:
 @author: Jose Notario Millan
 '''
 
-class Rectangulo():
-    
+class Rectangulo:
+
     def __init__(self, ancho, alto):
-        Rectangulo.__comprobarAncho(ancho)
-        Rectangulo.__comprobarAlto(alto)
         self.__ancho = ancho
         self.__alto = alto
-    
+
     @property
     def ancho(self):
         return self.__ancho
+
+    @ancho.setter
+    def ancho(self, an):
+        Rectangulo.verifica_lado(an)
+        self.__ancho = an
+
     @property
     def alto(self):
         return self.__alto
-    
-    ##Setters##
-    @ancho.setter
-    def ancho(self, ancho):
-        Rectangulo.__comprobarAncho(ancho)
-        self.__ancho = ancho
-        
+
     @alto.setter
-    def alto(self, alto):
-        Rectangulo.__comprobarAlto(alto)
-        self.__alto = alto
-    
-    ## Lanzamiento de Exepciones ##
+    def alto(self, al):
+        Rectangulo.verifica_lado(al)
+        self.__alto = al
+
     @staticmethod
-    def __comprobarAncho(ancho):
-        if ancho <= 0 or ancho > 10:
-            raise TypeError("El ancho indicado es inválido.")
-    
-    @staticmethod
-    def __comprobarAlto(alto):
-        if alto <= 0 or alto > 10:
-            raise TypeError("El alto indicado es inválido.")
+    def verifica_lado(num):
+        if (num <= 0 or num > 10):
+            raise ArithmeticError()
         
     '''
     
