@@ -43,7 +43,7 @@ public class TestAlmacen {
         modificar();
         break;
       case 4:
-        annadirStock();
+        annadir();
         break;
       case 5:
         quitarStock();
@@ -85,18 +85,6 @@ public class TestAlmacen {
   }
 
   /**
-   * Añade unidades de un articulo al stock que ya tiene
-   */
-  public static void annadirStock() {
-    try {
-      almacen.annadirStock(Teclado.leerEntero("Introduzca el codigo del articulo a añadir las unidades: "),
-          Teclado.leerEntero("Introduzca el numero de unidades a A�adir: "));
-    } catch (StockNegativoExeption | CodigoNoExisteException e) {
-      System.err.println(e.getMessage());
-    }
-  }
-
-  /**
    * modifica cualquier campo del articulo del almacen.
    */
   public static void modificar() {
@@ -123,7 +111,9 @@ public class TestAlmacen {
    */
   public static void annadir() {
     try {
-      annadirArticulo();
+      almacen.annadir(Teclado.leerEntero("Introduzca el numero de unidades: "),
+          Teclado.leerDecimal("Introduzca el precio de Compra: "), Teclado.leerDecimal("Introduzca el precio de Venta: "),
+          elegirIva(), Teclado.leerCadena("Introduzca la descripcion"));
     } catch (IvaNotNullExeption | PrecioNegativoExeption | StockNegativoExeption e) {
       System.err.println(e.getMessage());
       System.err.println("El articulo no se ha creado.");
@@ -145,19 +135,6 @@ public class TestAlmacen {
     default:
       return IVA.SUPERREDUCIDO;
     }
-  }
-
-  /**
-   * Introduce el articulo en el almacen
-   * 
-   * @throws IvaNotNullExeption
-   * @throws PrecioNegativoExeption
-   * @throws StockNegativoExeption
-   */
-  public static void annadirArticulo() throws IvaNotNullExeption, PrecioNegativoExeption, StockNegativoExeption {
-    almacen.annadir(Teclado.leerEntero("Introduzca el numero de unidades: "),
-        Teclado.leerDecimal("Introduzca el precio de Compra: "), Teclado.leerDecimal("Introduzca el precio de Venta: "),
-        elegirIva(), Teclado.leerCadena("Introduzca la descripcion"));
   }
 
   public static void modifica(int codigo)
